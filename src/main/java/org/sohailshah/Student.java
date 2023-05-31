@@ -16,6 +16,8 @@ public class Student {
     private int age;
     @Enumerated(EnumType.STRING)
     private StudentType studentType;
+    @OneToOne
+    private LibraryCard card;
     @Temporal(TemporalType.DATE)
     private Date dob;
     @Column(unique = true, length = 10, nullable = false, updatable = false)
@@ -32,7 +34,13 @@ public class Student {
                 ", admission_no='" + admission_no + '\'' +
                 '}';
     }
+    public LibraryCard getCard() {
+        return card;
+    }
 
+    public void setCard(LibraryCard card) {
+        this.card = card;
+    }
     public StudentType getStudentType() {
         return studentType;
     }
