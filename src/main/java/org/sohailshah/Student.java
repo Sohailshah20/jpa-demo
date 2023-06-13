@@ -2,6 +2,7 @@ package org.sohailshah;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Student_Table")
@@ -12,28 +13,26 @@ public class Student {
     private int id;
     @Column(name = "student_name")
     private String name;
-
     private int age;
     @Enumerated(EnumType.STRING)
     private StudentType studentType;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private LibraryCard card;
     @Temporal(TemporalType.DATE)
     private Date dob;
     @Column(unique = true, length = 10, nullable = false, updatable = false)
     private String admission_no;
+    @OneToMany(mappedBy = "assignedTo")
+    private List<Assignment> assignmentList;
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", studentType=" + studentType +
-                ", dob=" + dob +
-                ", admission_no='" + admission_no + '\'' +
-                '}';
+    public List<Assignment> getAssignmentList() {
+        return assignmentList;
     }
+
+    public void setAssignmentList(List<Assignment> assignmentList) {
+        this.assignmentList = assignmentList;
+    }
+
     public LibraryCard getCard() {
         return card;
     }
@@ -85,5 +84,19 @@ public class Student {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id + "\n" +
+                ", name='" + name + '\'' + "\n" +
+                ", age=" + age + "\n" +
+                ", studentType=" + studentType + "\n" +
+                ", card=" + card + "\n" +
+                ", dob=" + dob + "\n" +
+                ", admission_no='" + admission_no + '\'' + "\n" +
+                ", assignmentList=" + assignmentList + "\n" +
+                '}';
     }
 }

@@ -13,6 +13,17 @@ public class LibraryCard {
     private Date issuedDate;
     private boolean isActive;
 
+    @OneToOne(mappedBy = "card")
+    private Student owner;
+
+    public Student getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Student owner) {
+        this.owner = owner;
+    }
+
     public int getId() {
         return id;
     }
@@ -35,5 +46,14 @@ public class LibraryCard {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    @Override
+    public String toString() {
+        return "LibraryCard{" +
+                "id=" + id +
+                ", issuedDate=" + issuedDate +
+                ", isActive=" + isActive +
+                '}';
     }
 }
