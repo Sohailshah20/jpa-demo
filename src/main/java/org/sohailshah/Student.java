@@ -1,6 +1,7 @@
 package org.sohailshah;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +25,16 @@ public class Student {
     private String admission_no;
     @OneToMany(mappedBy = "assignedTo")
     private List<Assignment> assignmentList;
+    @ManyToMany()
+    private List<Club> clubs = new ArrayList<>();
+
+    public List<Club> getClubs() {
+        return clubs;
+    }
+
+    public void setClubs(List<Club> clubs) {
+        this.clubs = clubs;
+    }
 
     public List<Assignment> getAssignmentList() {
         return assignmentList;
@@ -84,6 +95,10 @@ public class Student {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void addClub(Club club){
+        this.clubs.add(club);
     }
 
     @Override

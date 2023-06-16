@@ -28,29 +28,41 @@ public class Main {
         student2.setDob(new Date());
         student2.setStudentType(StudentType.NON_SCHOLARSHIP);
 
-        LibraryCard card1 = new LibraryCard();
-        card1.setActive(true);
-        card1.setIssuedDate(new Date());
+        Club club1 = new Club();
+        club1.setName("Java Club");
+        club1.addStudent(student1);
+        club1.addStudent(student2);
+        student1.addClub(club1);
+        student2.addClub(club1);
 
-        LibraryCard card2 = new LibraryCard();
-        card2.setActive(false);
-        card2.setIssuedDate(new Date());
+        Club club2 = new Club();
+        club2.setName("Spring Club");
+        club2.addStudent(student2);
+        student2.addClub(club2);
 
-        Assignment ass1 = new Assignment();
-        ass1.setTitle("JAVA");
-        ass1.setDueDate(new Date());
-        ass1.setAssignedTo(student1);
-
-        Assignment ass2 = new Assignment();
-        ass2.setTitle("DSA");
-        ass2.setDueDate(new Date());
-        ass2.setAssignedTo(student1);
-
-        student1.setCard(card1);
-        student2.setCard(card2);
-
-        card1.setOwner(student1);
-        card2.setOwner(student2);
+//        LibraryCard card1 = new LibraryCard();
+//        card1.setActive(true);
+//        card1.setIssuedDate(new Date());
+//
+//        LibraryCard card2 = new LibraryCard();
+//        card2.setActive(false);
+//        card2.setIssuedDate(new Date());
+//
+//        Assignment ass1 = new Assignment();
+//        ass1.setTitle("JAVA");
+//        ass1.setDueDate(new Date());
+//        ass1.setAssignedTo(student1);
+//
+//        Assignment ass2 = new Assignment();
+//        ass2.setTitle("DSA");
+//        ass2.setDueDate(new Date());
+//        ass2.setAssignedTo(student1);
+//
+//        student1.setCard(card1);
+//        student2.setCard(card2);
+//
+//        card1.setOwner(student1);
+//        card2.setOwner(student2);
 
         //creating a transaction object using the entity manager
         EntityTransaction transaction = entityManager.getTransaction();
@@ -59,10 +71,8 @@ public class Main {
         //updating the student
         entityManager.persist(student1);
         entityManager.persist(student2);
-        entityManager.persist(card1);
-        entityManager.persist(card2);
-        entityManager.persist(ass1);
-        entityManager.persist(ass2);
+        entityManager.persist(club1);
+        entityManager.persist(club2);
 //        entityManager.persist(card1);
 //        entityManager.persist(card2);
         //committing the transaction
